@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 
 const YaziListesi = (props) => {
 
@@ -15,16 +15,18 @@ const YaziListesi = (props) => {
 
 
 
-    return   <div className="ui relaxed divided list"> {yaziListesi.map((yazi) => {
-        return (<div className="item" key={yazi.id}>
-            <i className="large github middle aligned icon"></i>
-            <div className="content">
-                <a className="header">{yazi.title}</a>
-                <div className="description">{yazi.created_at}</div>
-            </div>
-        </div>)
-    })}
-    {""}
+    return (<div className="ui relaxed divided list">
+        {yaziListesi.map((yazi) => {
+            return (<div className="item" key={yazi.id}>
+                <i className="large github middle aligned icon"></i>
+                <div className="content">
+                    <Link to={`/posts/ ${yazi.id}`} className="header">{yazi.title}</Link>
+                    <div className="description">{yazi.created_at}</div>
+                </div>
+            </div>)
+        })}
+        {""}
     </div>
+    )
 }
 export default YaziListesi;
