@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../api";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
@@ -14,7 +14,7 @@ const YaziFormu = (props) => {
 
 
 
-        axios.post('https://react-yazi-yorum.herokuapp.com/posts/', yazi)
+        api().post('/posts/', yazi)
             .then(response => {
                 props.history.push('/ ')
             }).catch(error => {

@@ -1,6 +1,7 @@
-import axios, { Axios } from "axios";
+import { api } from "../api";
 import React, { useEffect, useState } from "react";
 import YaziYorumlari from "./YaziYorumlari";
+import axios from "axios";
 
 
 
@@ -17,9 +18,9 @@ const YaziDetayi = (props) => {
    //bize yorumu getirecek olan kod parçacığı 
     const handleCommentSubmit = (event,yorum) => {
         event.preventDefault(); 
-        axios.post(`https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
-            yorum
-        ).then((response) => {
+        api()
+        .post(`/posts/${id}/comments`,yorum)
+        .then((response) => {
             setYorumlar([...yorumlar, response.data]);
             
         })
@@ -31,8 +32,8 @@ const YaziDetayi = (props) => {
         //axios.all sayesinde iki benzer isteği birlite getirebiliriz.String yerine diziyle yaparız.
 
         axios.all([
-            axios.get(`https://react-yazi-yorum.herokuapp.com/posts/${id}`), //datayı verir
-            axios.get(`https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`) //yorumları getirir
+            api().get(`/posts/${id}`), //datayı verir
+            api().get(`/posts/${id}/comments`) //yorumları getirir
         ]).then(responses => {
             setYaziDetayi(responses[0].data)
             setYorumlar(responses[1].data)
